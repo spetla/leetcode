@@ -9,7 +9,7 @@ class Solution:
         ## if empty tree
         if root == None:
             return []
-        ## final result list
+        ## final result list 
         res = []
         ## queue for storing nodes
         queue = collections.deque([root])
