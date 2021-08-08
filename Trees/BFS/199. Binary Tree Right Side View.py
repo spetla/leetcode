@@ -5,17 +5,14 @@
 #         self.left = left
 #         self.right = right
 class Solution:
-    def levelOrderBottom(self, root: Optional[TreeNode]) -> List[List[int]]:
+    def rightSideView(self, root: Optional[TreeNode]) -> List[int]:
         ## if empty tree
-        if  root == None:
+        if root==None:
             return []
-        
         ## queue for storing nodes
         queue = collections.deque([root])
-
         ## final result list
-        res =[]
-        
+        res = []
         ## until queue is empty
         while(queue):
             ## store node values at a level
@@ -25,14 +22,14 @@ class Solution:
                 node = queue.popleft()
                 ## add to level list
                 level.append(node.val)
-                ## add left and  right child of parent to the  queue
-                if node.left:
-                    queue.extend([node.left])
-                if node.right:
+                ## add RIGHT and then LEFT child of parent to the queue
+                if node.right!= None:
                     queue.extend([node.right])
-            ## add level list to the final result
-            res.append(level)
-        return  res[::-1]
-            
+                if node.left!=None:
+                    queue.extend([node.left])
+            ## add rightmost level item to the final result
+            res.append(level[0])
+        return res
+                
             
         

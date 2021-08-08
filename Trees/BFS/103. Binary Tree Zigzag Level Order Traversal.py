@@ -5,17 +5,16 @@
 #         self.left = left
 #         self.right = right
 class Solution:
-    def levelOrderBottom(self, root: Optional[TreeNode]) -> List[List[int]]:
+    def zigzagLevelOrder(self, root: Optional[TreeNode]) -> List[List[int]]:
         ## if empty tree
-        if  root == None:
+        if root == None:
             return []
-        
+        ## final result list
+        res = []
         ## queue for storing nodes
         queue = collections.deque([root])
-
-        ## final result list
-        res =[]
-        
+        ## counter for zigzag logic
+        count = 1
         ## until queue is empty
         while(queue):
             ## store node values at a level
@@ -23,16 +22,24 @@ class Solution:
             for _ in range(len(queue)):
                 ## pop left most node
                 node = queue.popleft()
-                ## add to level list
-                level.append(node.val)
+                ## zigzag logic
+                if count%2 == 1:
+                    ## add to level list
+                    level = [node.val] + level
+                else:
+                    ## add to level list
+                    level.append(node.val)
                 ## add left and  right child of parent to the  queue
-                if node.left:
-                    queue.extend([node.left])
-                if node.right:
+                if node.right != None:
                     queue.extend([node.right])
+                if node.left != None:
+                    queue.extend([node.left])
             ## add level list to the final result
             res.append(level)
-        return  res[::-1]
-            
-            
+            count = count + 1
+        return res
+                
+                
+        
+        
         
